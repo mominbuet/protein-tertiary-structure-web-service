@@ -1,0 +1,23 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+#chatLog{
+    padding:5px;
+    border:1px solid black;
+}
+#chatLog p {
+    margin:0;
+}
+.event {
+    color:#999;
+}
+.warning{
+    font-weight:bold;
+    color:#CCC;
+}
