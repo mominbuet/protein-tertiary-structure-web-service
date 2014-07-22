@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import org.sample.db.PProtein;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-07-03T14:48:25")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-07-23T02:48:19")
 @StaticMetamodel(PCamat32.class)
 public class PCamat32_ { 
 

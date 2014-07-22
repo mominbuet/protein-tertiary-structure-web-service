@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+//alert('here');
 var wsUri = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
 var websocket = new WebSocket(wsUri);
 

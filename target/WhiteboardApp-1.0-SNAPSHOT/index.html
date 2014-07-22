@@ -82,10 +82,11 @@
 
         <script type="text/javascript" src="websocket.js"></script>
         <!--        <script type="text/javascript" src="whiteboard.js"></script>-->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!--        <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
         <script>
             function connect() {
                 var socket;
+                console.log(document.location.pathname);
                 var host = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
 
                 try {

@@ -32,7 +32,7 @@ public class MyWhiteboard {
     public void onMessage(String message,Session s) throws IOException{
         System.out.println("Msg:  "+message);
         Comogphogfeature searchFeat = qdb.getFeatureByScopID(message);
-        Jedis jedis = new Jedis("localhost");
+        Jedis jedis = new Jedis("123.49.42.228");
         
         jedis.set("foo", searchFeat.getFeatureVector());
         s.getBasicRemote().sendText("redis working: "+jedis.get("foo"));

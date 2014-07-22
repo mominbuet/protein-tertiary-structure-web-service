@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author user
+ * @author Gun2sh
  */
 @Entity
 @Table(name = "p_protein")
@@ -59,8 +60,18 @@ public class PProtein implements Serializable {
     @Size(max = 250)
     @Column(name = "Name")
     private String name;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "histogram")
+    private String histogram;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "histogram128")
+    private String histogram128;
     @Column(name = "Dataset")
     private Integer dataset;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pid")
+    private Collection<PCamat32> pCamat32Collection;
     @OneToMany(mappedBy = "pid")
     private Collection<Comogphogfeature> comogphogfeatureCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pid")
@@ -111,12 +122,37 @@ public class PProtein implements Serializable {
         this.name = name;
     }
 
+    public String getHistogram() {
+        return histogram;
+    }
+
+    public void setHistogram(String histogram) {
+        this.histogram = histogram;
+    }
+
+    public String getHistogram128() {
+        return histogram128;
+    }
+
+    public void setHistogram128(String histogram128) {
+        this.histogram128 = histogram128;
+    }
+
     public Integer getDataset() {
         return dataset;
     }
 
     public void setDataset(Integer dataset) {
         this.dataset = dataset;
+    }
+
+    @XmlTransient
+    public Collection<PCamat32> getPCamat32Collection() {
+        return pCamat32Collection;
+    }
+
+    public void setPCamat32Collection(Collection<PCamat32> pCamat32Collection) {
+        this.pCamat32Collection = pCamat32Collection;
     }
 
     @XmlTransient
