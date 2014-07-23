@@ -19,7 +19,7 @@ public class querydb {
     public List<PProtein> getproteins() {
         List<PProtein> res = new ArrayList<PProtein>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.sample_WhiteboardApp");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
             res = em.createNamedQuery("PProtein.findAll", PProtein.class).getResultList();
             //res =  results;
@@ -31,7 +31,7 @@ public class querydb {
     public List<Comogphogfeature> getFeatures() {
         List<Comogphogfeature> res = new ArrayList<Comogphogfeature>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.sample_WhiteboardApp");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
             res = em.createNamedQuery("Comogphogfeature.findAll", Comogphogfeature.class).setMaxResults(50).getResultList();
             System.out.println("Count:: "+res.size());
@@ -43,8 +43,10 @@ public class querydb {
     public Comogphogfeature getFeatureByScopID(String scop) {
         Comogphogfeature res = new Comogphogfeature();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.sample_WhiteboardApp");
+            System.out.println("Here1");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
+            System.out.println("Here2");
             res = em.createNamedQuery("Comogphogfeature.findByScopid", Comogphogfeature.class).setParameter("scopid", scop)
                     .setMaxResults(1).getResultList().get(0);
             System.out.println("Count:: "+res.getScopid());

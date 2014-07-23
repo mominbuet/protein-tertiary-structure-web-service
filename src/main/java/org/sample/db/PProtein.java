@@ -15,7 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -60,14 +59,6 @@ public class PProtein implements Serializable {
     @Size(max = 250)
     @Column(name = "Name")
     private String name;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "histogram")
-    private String histogram;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "histogram128")
-    private String histogram128;
     @Column(name = "Dataset")
     private Integer dataset;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pid")
@@ -120,22 +111,6 @@ public class PProtein implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getHistogram() {
-        return histogram;
-    }
-
-    public void setHistogram(String histogram) {
-        this.histogram = histogram;
-    }
-
-    public String getHistogram128() {
-        return histogram128;
-    }
-
-    public void setHistogram128(String histogram128) {
-        this.histogram128 = histogram128;
     }
 
     public Integer getDataset() {
