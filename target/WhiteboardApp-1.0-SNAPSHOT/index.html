@@ -84,6 +84,7 @@
         <!--        <script type="text/javascript" src="whiteboard.js"></script>-->
         <!--        <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
         <script>
+            var flg = 2;//default recieved
             function connect() {
                 var socket;
                 console.log(document.location.pathname);
@@ -99,7 +100,18 @@
                     }
 
                     socket.onmessage = function(msg) {
-                        message('<p class="message">Received: ' + msg.data);
+                        if (msg.data = "result")
+                            flg = 0;
+                        else if (msg.data = "log")
+                            flg = 1;
+                        else {
+                            if (flg == 0)
+                                message('<p class="result"> ' + msg.data);
+                            else if (flg == 1)
+                                message('<p class="log">log ' + msg.data);
+                            else
+                                message('<p class="message">Received: ' + msg.data);
+                        }
                     }
 
                     socket.onclose = function() {
@@ -119,6 +131,7 @@
                     }
                     try {
                         socket.send(text);
+
                         message('<p class="event">Sent: ' + text)
 
                     } catch (exception) {

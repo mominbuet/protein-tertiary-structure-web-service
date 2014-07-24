@@ -8,14 +8,23 @@ body {
 }
 
 #chatLog{
-    padding:5px;
+    padding:2px;
     border:1px solid black;
 }
 #chatLog p {
     margin:0;
+    font-size: .85em;
+}
+
+.log{
+    font-size: .75em;
+    
 }
 .event {
     color:#999;
+}
+.result {
+    color:red;
 }
 .warning{
     font-weight:bold;
