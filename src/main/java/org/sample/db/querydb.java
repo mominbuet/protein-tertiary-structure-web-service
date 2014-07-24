@@ -43,13 +43,13 @@ public class querydb {
     public Comogphogfeature getFeatureByScopID(String scop) {
         Comogphogfeature res = new Comogphogfeature();
         try {
-            System.out.println("Here1");
+            //System.out.println("Here1");
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
-            System.out.println("Here2");
+            //System.out.println("Here2");
             res = em.createNamedQuery("Comogphogfeature.findByScopid", Comogphogfeature.class).setParameter("scopid", scop)
                     .setMaxResults(1).getResultList().get(0);
-            System.out.println("Count:: "+res.getScopid());
+            System.out.println("found:: "+res.getScopid());
             //res =  results;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

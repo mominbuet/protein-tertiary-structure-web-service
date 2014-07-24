@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Gun2sh
+ * @author user
  */
 @Entity
 @Table(name = "p_protein")
@@ -61,8 +61,6 @@ public class PProtein implements Serializable {
     private String name;
     @Column(name = "Dataset")
     private Integer dataset;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pid")
-    private Collection<PCamat32> pCamat32Collection;
     @OneToMany(mappedBy = "pid")
     private Collection<Comogphogfeature> comogphogfeatureCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pid")
@@ -119,15 +117,6 @@ public class PProtein implements Serializable {
 
     public void setDataset(Integer dataset) {
         this.dataset = dataset;
-    }
-
-    @XmlTransient
-    public Collection<PCamat32> getPCamat32Collection() {
-        return pCamat32Collection;
-    }
-
-    public void setPCamat32Collection(Collection<PCamat32> pCamat32Collection) {
-        this.pCamat32Collection = pCamat32Collection;
     }
 
     @XmlTransient

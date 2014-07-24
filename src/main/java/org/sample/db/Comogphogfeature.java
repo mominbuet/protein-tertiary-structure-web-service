@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Gun2sh
+ * @author user
  */
 @Entity
 @Table(name = "comogphogfeature")
