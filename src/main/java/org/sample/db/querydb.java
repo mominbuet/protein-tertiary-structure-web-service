@@ -79,7 +79,7 @@ public class querydb {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
             //System.out.println("Here2");
-            res = em.createNamedQuery("PDetails.findByProtein", PDetails.class).setParameter("pid", scop.getPid())
+            res = em.createNamedQuery("PDetails.FindByPid", PDetails.class).setParameter("pid", scop.getPid())
                     .setMaxResults(1).getResultList().get(0);
             //System.out.println("found:: "+res.getScopid());
             //res =  results;

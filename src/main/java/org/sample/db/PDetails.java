@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PDetails.findBySuperfamily", query = "SELECT p FROM PDetails p WHERE p.superfamily = :superfamily"),
     @NamedQuery(name = "PDetails.findByFamily", query = "SELECT p FROM PDetails p WHERE p.family = :family"),
     @NamedQuery(name = "PDetails.findByProtein", query = "SELECT p FROM PDetails p WHERE p.protein = :protein"),
+    @NamedQuery(name = "PDetails.FindByPid", query = "SELECT p FROM PDetails p WHERE p.pid.pid = :pid"),
     @NamedQuery(name = "PDetails.findBySpecies", query = "SELECT p FROM PDetails p WHERE p.species = :species"),
     @NamedQuery(name = "PDetails.findBySunid", query = "SELECT p FROM PDetails p WHERE p.sunid = :sunid")})
 public class PDetails implements Serializable {

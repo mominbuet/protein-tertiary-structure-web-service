@@ -41,13 +41,18 @@ public class MyWhiteboard {
     public void onMessage(String message, Session s) throws IOException {
         System.out.println("Msg:  " + message);
 
+//        PProtein pres = qdb.getProteinByScopID(message);
+//        //s.getBasicRemote().sendText(pres.getScopsid());
+//        PDetails pdet = qdb.getDetailsByScopID(pres);
+//        s.getBasicRemote().sendText(pdet.getFamily());
+
         Comogphogfeature searchFeat = qdb.getFeatureByScopID(message);
         if (searchFeat != null) {
             System.out.println("Here");
             s.getBasicRemote().sendText("ScopID found in database,start time"
                     + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
             s.getBasicRemote().sendText("Working on redis cache...");
-            System.out.println("Here");
+
             Jedis jedis = new Jedis("123.49.42.228");
             Set<String> scops = jedis.keys("d*");
             jedis.set(searchFeat.getScopid(), searchFeat.getFeatureVector());
@@ -76,7 +81,7 @@ public class MyWhiteboard {
                 if (done % 10000 == 0) {
                     NumberFormat anotherFormat = NumberFormat
                             .getNumberInstance(Locale.US);
-                    s.getBasicRemote().sendText(anotherFormat.format( done) + " done, Please wait for the next " + anotherFormat.format((scops.size() - done)));
+                    s.getBasicRemote().sendText(anotherFormat.format(done) + " done, Please wait for the next " + anotherFormat.format((scops.size() - done)));
                 }
             }
             distances = new utils().sortByComparator(distances);
@@ -86,8 +91,9 @@ public class MyWhiteboard {
             for (Map.Entry entry : distances.entrySet()) {
                 done++;
                 PProtein pres = qdb.getProteinByScopID((String) entry.getKey());
-                
+                //s.getBasicRemote().sendText(pres.getScopsid());
                 PDetails pdet = qdb.getDetailsByScopID(pres);
+                //s.getBasicRemote().sendText(pdet.getFamily());
                 s.getBasicRemote().sendText("Scop : <a href=\"http://scop.berkeley.edu/sunid=" + pdet.getSunid() + "\">" + entry.getKey()
                         + "</a> Distance : " + entry.getValue());
                 if (done == 30) {
