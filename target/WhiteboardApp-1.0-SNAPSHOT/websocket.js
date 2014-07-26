@@ -21,7 +21,7 @@ function writeToScreen(message) {
 }
 
 function onOpen() {
-    writeToScreen("Connected to " + wsUri);
+    writeToScreen("Connected to WebSocket");
 }
 websocket.onmessage = function(evt) { onMessage(evt) };
 

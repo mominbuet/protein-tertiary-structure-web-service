@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "PDetails.findAll", query = "SELECT p FROM PDetails p"),
     @NamedQuery(name = "PDetails.findByDetid", query = "SELECT p FROM PDetails p WHERE p.detid = :detid"),
+    //@NamedQuery(name = "PDetails.findByScopID", query = "SELECT p FROM PDetails p JOIN p. pd WHERE pd.pid=p and pd.scopsid= :scopid"),
     @NamedQuery(name = "PDetails.findByClass1", query = "SELECT p FROM PDetails p WHERE p.class1 = :class1"),
     @NamedQuery(name = "PDetails.findByFold", query = "SELECT p FROM PDetails p WHERE p.fold = :fold"),
     @NamedQuery(name = "PDetails.findBySuperfamily", query = "SELECT p FROM PDetails p WHERE p.superfamily = :superfamily"),

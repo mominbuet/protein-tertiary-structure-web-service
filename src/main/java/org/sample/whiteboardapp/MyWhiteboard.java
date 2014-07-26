@@ -6,14 +6,13 @@
 package org.sample.whiteboardapp;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -23,6 +22,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import org.sample.db.Comogphogfeature;
+import org.sample.db.PDetails;
+import org.sample.db.PProtein;
 import org.sample.db.querydb;
 import redis.clients.jedis.Jedis;
 
@@ -39,20 +40,22 @@ public class MyWhiteboard {
     @OnMessage
     public void onMessage(String message, Session s) throws IOException {
         System.out.println("Msg:  " + message);
-        
+
         Comogphogfeature searchFeat = qdb.getFeatureByScopID(message);
         if (searchFeat != null) {
-            s.getBasicRemote().sendText("ScopID found in database,start time" +
-                    new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+            System.out.println("Here");
+            s.getBasicRemote().sendText("ScopID found in database,start time"
+                    + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
             s.getBasicRemote().sendText("Working on redis cache...");
+            System.out.println("Here");
             Jedis jedis = new Jedis("123.49.42.228");
             Set<String> scops = jedis.keys("d*");
             jedis.set(searchFeat.getScopid(), searchFeat.getFeatureVector());
-            
+
             s.getBasicRemote().sendText("Data(" + scops.size() + ") available in cache.....");
 
             String[] queryFeat = searchFeat.getFeatureVector().split("-");
-            s.getBasicRemote().sendText("calculating Distance of tertiary structures....");
+            s.getBasicRemote().sendText("calculating distances of tertiary structures....");
             s.getBasicRemote().sendText("log");
             Iterator<String> it = scops.iterator();
             Map<String, Double> distances = new TreeMap<String, Double>();
@@ -68,25 +71,32 @@ public class MyWhiteboard {
                 }
                 tmpDist = Math.sqrt(tmpDist);
                 distances.put(tmp, tmpDist);
-                s.getBasicRemote().sendText(tmp + " distance " + tmpDist);
+                //s.getBasicRemote().sendText(tmp + " distance " + tmpDist);
                 done++;
-                if (done% 100==0) {
-                    s.getBasicRemote().sendText(done + " done, Please wait for the next " + (scops.size() - done));
+                if (done % 10000 == 0) {
+                    NumberFormat anotherFormat = NumberFormat
+                            .getNumberInstance(Locale.US);
+                    s.getBasicRemote().sendText(anotherFormat.format( done) + " done, Please wait for the next " + anotherFormat.format((scops.size() - done)));
                 }
             }
             distances = new utils().sortByComparator(distances);
             s.getBasicRemote().sendText("sorted distances are:");
-             s.getBasicRemote().sendText("result");
+            s.getBasicRemote().sendText("result");
             done = 0;
             for (Map.Entry entry : distances.entrySet()) {
                 done++;
-                s.getBasicRemote().sendText("Scop : " + entry.getKey()
-                        + " Distance : " + entry.getValue());
-                if (done == 20) {
+                PProtein pres = qdb.getProteinByScopID((String) entry.getKey());
+                
+                PDetails pdet = qdb.getDetailsByScopID(pres);
+                s.getBasicRemote().sendText("Scop : <a href=\"http://scop.berkeley.edu/sunid=" + pdet.getSunid() + "\">" + entry.getKey()
+                        + "</a> Distance : " + entry.getValue());
+                if (done == 30) {
                     break;
-		
+
                 }
             }
+            s.getBasicRemote().sendText("End time"
+                    + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
 
 //            for (Comogphogfeature tmp : allFeat) {
 //                //if(i>50) break;

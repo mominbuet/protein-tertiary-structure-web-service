@@ -7,9 +7,9 @@
         <property name="databaseName" value="pprotein"/>
         <property name="User" value="root"/>
         <property name="Password" value="buet369"/>
-        <property name="URL" value="jdbc:mysql://localhost:3306/pprotein?zeroDateTimeBehavior=convertToNull"/>
+        <property name="URL" value="jdbc:mysql://localhost:3306/pprotein"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="pprotein" object-type="user" pool-name="mysql_pprotein_rootPool"/>
-    <jdbc-resource enabled="true" jndi-name="protein" object-type="user" pool-name="mysql_pprotein_rootPool"/>
 </resources>
+ 

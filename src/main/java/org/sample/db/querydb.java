@@ -56,4 +56,36 @@ public class querydb {
         }
         return res;
     }
+    public PProtein getProteinByScopID(String scop) {
+        PProtein res = new PProtein();
+        try {
+            //System.out.println("Here1");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
+            EntityManager em = emf.createEntityManager();
+            //System.out.println("Here2");
+            res = em.createNamedQuery("PProtein.findByScopsid", PProtein.class).setParameter("scopsid", scop)
+                    .setMaxResults(1).getResultList().get(0);
+            //System.out.println("found:: "+res.getScopid());
+            //res =  results;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return res;
+    }
+    public PDetails getDetailsByScopID(PProtein scop) {
+        PDetails res = new PDetails();
+        try {
+            //System.out.println("Here1");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
+            EntityManager em = emf.createEntityManager();
+            //System.out.println("Here2");
+            res = em.createNamedQuery("PDetails.findByProtein", PDetails.class).setParameter("pid", scop.getPid())
+                    .setMaxResults(1).getResultList().get(0);
+            //System.out.println("found:: "+res.getScopid());
+            //res =  results;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return res;
+    }
 }
