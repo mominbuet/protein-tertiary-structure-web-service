@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <!--        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
 
-        <title>Protein Tertiary Matching</title>
+        <title>Comograd :: Protein Tertiary Matching</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -42,10 +42,10 @@
                             <li class="dropdown">
                                 <a id="peoples" role="button" data-toggle="dropdown" data-target="#" class="dropdown-toggle" href="#">Peoples<b class="caret"></b></a>
                                 <ul class="dropdown-menu" aria-labelledby="peoples" role="menu">
-                                   <li><a href="#">Name1</a></li>
-                                   <li><a href="#">Name2</a></li>
-                                   <li><a href="#">Name3</a></li>
-                                   
+                                    <li><a href="#">Name1</a></li>
+                                    <li><a href="#">Name2</a></li>
+                                    <li><a href="#">Name3</a></li>
+
                                     <li class="divider"></li>
                                     <li><a href="#">Name4</a></li>
                                     <li><a href="#">Name5</a></li>
@@ -64,13 +64,26 @@
         </div>
         <div class="hero-unit">
             <div class="offset2">
+                <p>This web service is for comparing protein tertiary structure i.e 3D structure. 
+                    You can query here to compare query structure with all proteins in entire database and get 
+                    structural neighbours. Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">here</a>.
+                    Results also have a link to scop so that you can see more details about the structure there. We can process your query in instant where you had to wait few hours for query results in other web services who do similar tasks. You dont have to submit your email address to get your query results few hours later, you can have it here at instant!.To know about how to submit query see "user guide" section. To know how this works, go to "publication" section. 
+                </p>
+                <h4><u>User guide:</u></h4>
+                <p>You can submit query two ways, submit pdb format structure file or submit scopId for the structures that are already in scop 2.03.   </p>
+
+                <ol>
+                    <li>query with scopId: Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1lp1b_" is a 7 character scopId.</li>
+
+                    <li>query with pdb format file: For novel structure that are not already in pdb and scop, you can submit the structure as pdb format text file and upload. The novel structure may be from the out of structure prediction tool or anything else. You can also submit structure in pdb format filrs for the structures already in our database.</li>
+                </ol>
 
                 <h3>Enter ScopID</h3>
 
-                <p id="examples">Press enter after the scopID(eg d16vpa_)</p>
+                <p id="examples">Press enter after the scopID(ie. d1lp1b_)</p>
                 <input class="input-xlarge form-control" id ="text" type="text"  name="search_text">
                 <!--                <input id="text" type="text" />-->
-                <button id="disconnect" class="btn btn-primary" type="button">Disconnect</button>
+                <button id="disconnect" class="btn btn-danger" type="button">Disconnect</button>
                 <div id="chatLog">
 
                 </div><!-- #chatLog -->
@@ -148,6 +161,7 @@
                 $('#text').keypress(function(event) {
                     if (event.keyCode == '13') {
                         send();
+                        $('#chatlog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
                     }
                 });
 

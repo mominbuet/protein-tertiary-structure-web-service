@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import org.sample.db.Comogphogfeature;
 import org.sample.db.PDetails;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-07-26T16:29:38")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2014-08-23T10:52:23")
 @StaticMetamodel(PProtein.class)
 public class PProtein_ { 
 
