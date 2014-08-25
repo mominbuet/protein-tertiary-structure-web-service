@@ -85,7 +85,7 @@ public class MyWhiteboard {
                 }
             }
             distances = new utils().sortByComparator(distances);
-            s.getBasicRemote().sendText("sorted distances are:");
+            s.getBasicRemote().sendText("Closest structures are:");
             s.getBasicRemote().sendText("result");
             done = 0;
             for (Map.Entry entry : distances.entrySet()) {
