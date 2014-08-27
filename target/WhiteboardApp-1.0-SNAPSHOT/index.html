@@ -32,8 +32,8 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="publication.html">Publication</a></li>
+                        <li><a href="Upcoming.html">Upcoming</a></li>
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Peoples<b class="caret"></b></a>
                             <ul class="dropdown-menu" id="menu1">
@@ -57,30 +57,37 @@
         </div>
         <div class="hero-unit">
             <div class="offset2">
-                <p>This web service is for comparing protein tertiary structure i.e 3D structure. 
-                    You can query here to compare query structure with all proteins in entire database and get 
-                    structural neighbours. Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">here</a>.
-                    Results also have a link to scop so that you can see more details about the structure there. We can process your query in instant where you had to wait few hours for query results in other web services who do similar tasks. You dont have to submit your email address to get your query results few hours later, you can have it here at instant!.To know about how to submit query see "user guide" section. To know how this works, go to "publication" section. 
-                </p>
-                <h4><u>User guide:</u></h4>
-                <p>You can submit query two ways, submit pdb format structure file or submit scopId for the structures that are already in scop 2.03.   </p>
+                <div id="info">
+                    <p>This web service is for comparing protein tertiary structure i.e 3D structure. 
+                        You can query here to compare query structure with all proteins in entire database and get 
+                        structural neighbours. Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">here</a>.
+                        Results also have a link to scop so that you can see more details about the structure there. We can process your query in instant where you had to wait few hours for query results in other web services who do similar tasks. You dont have to submit your email address to get your query results few hours later, you can have it here at instant!.To know about how to submit query see "user guide" section. To know how this works, go to "publication" section. 
+                    </p>
+                    <h4><u>User guide:</u></h4>
+                    <p>You can submit query two ways, submit pdb format structure(<b>Coming soon...</b>) file or submit scopId for the structures that are already in scop 2.03.   </p>
 
-                <ol>
-                    <li>query with scopId: Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1lp1b_" is a 7 character scopId.</li>
-
-                    <li>query with pdb format file: For novel structure that are not already in pdb and scop, you can submit the structure as pdb format text file and upload. The novel structure may be from the out of structure prediction tool or anything else. You can also submit structure in pdb format filrs for the structures already in our database.</li>
-                </ol>
-
+                    <p>
+                    <h4>Query with scopId:</h4> Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1lp1b_" is a 7 character scopId.
+                    </p>
+                </div>
                 <h3>Enter ScopID</h3>
 
                 <p id="examples">Press enter after the scopID(ie. d1lp1b_)</p>
-                <input class="input-xlarge form-control" id ="text" type="text"  name="search_text">
-                <!--                <input id="text" type="text" />-->
-                <button id="disconnect" class="btn btn-danger" type="button">Disconnect</button>
-                <div id="chatLog">
+                <div class="input-group">
+                    <input class="input-xlarge form-control" placeholder="scopid here..." id ="text" type="text"  name="search_text">
+                    <span class="input-group-btn">
+                        <button id="send" class="btn btn-success" type="button">Search</button>
+                    </span>
+                </div>
+                <h3>Upload pdb file(<i>coming soon...</i>)</h3>
+                <input class="form-control disabled" type="file"/>
+                <button class="btn btn-danger disabled" type="button">Upload</button>
+                <br><br><br>
+                <div id="allLogs">
+                    <div id="chatLog" class="chatlog">
 
-                </div><!-- #chatLog -->
-
+                    </div>
+                </div>
             </div>
         </div>
         <!-- /container -->
@@ -91,17 +98,14 @@
         <!--        <script type="text/javascript" src="whiteboard.js"></script>-->
         <!--        <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
         <script>
-            var flg = 2;//default recieved
+            var flg = 2; //default recieved
             function connect() {
                 var socket;
                 console.log(document.location.pathname);
                 var host = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
-
                 try {
                     var socket = new WebSocket(host);
-
                     message('<p class="event">Socket Status: ' + socket.readyState);
-
                     socket.onopen = function() {
                         message('<p class="event">Socket Status: ' + socket.readyState + ' (open)');
                     }
@@ -131,40 +135,52 @@
 
                 function send() {
                     var text = $('#text').val();
-
                     if (text == "") {
                         message('<p class="warning">Please enter a message');
                         return;
                     }
                     try {
                         socket.send(text);
-
                         message('<p class="event">Sent: ' + text)
 
                     } catch (exception) {
                         message('<p class="warning">');
                     }
                     $('#text').val("");
-                    $('#text').val("");
                 }
 
                 function message(msg) {
                     $('#chatLog').append(msg + '</p>');
                 }
+                $('#send').click(function() {
+                    $('#chatLog p').remove(1000);
+                    //$('#').remove();
+                    //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
+                    $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
+                    send();
 
-                $('#text').keypress(function(event) {
-                    if (event.keyCode == '13') {
-                        $('#chatlog p').html('');
-                        send();
-                        
-                        $('#chatlog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
-                    }
+
                 });
-
+                /*$('#text').bind('keypress', function(e) {
+                    if (e.keyCode == 13) {
+                        $('#chatLog p').remove(1000);
+                        //$('#').remove();
+                        //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
+                        $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
+                    }
+                });*/
+                $('#text').keypress(function(event) {
+                    if (event.keyCode == 13) {
+                        $('#chatLog p').remove(1000);
+                        //$('#').remove();
+                        //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
+                        $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
+                        send();
+                    }
+                 });
                 $('#disconnect').click(function() {
                     socket.close();
                 });
-
             }//End connect
             $(document).ready(function() {
 
@@ -175,9 +191,6 @@
                     //The user has WebSockets
 
                     connect();
-
-
-
                 }//End else
 
             });

@@ -41,7 +41,7 @@ public class querydb {
         return res;
     }
     public Comogphogfeature getFeatureByScopID(String scop) {
-        Comogphogfeature res = new Comogphogfeature();
+        Comogphogfeature res = null;
         try {
             //System.out.println("Here1");
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
@@ -52,7 +52,9 @@ public class querydb {
             System.out.println("found:: "+res.getScopid());
             //res =  results;
         } catch (Exception ex) {
+            
             System.out.println(ex.getMessage());
+            return null;
         }
         return res;
     }
