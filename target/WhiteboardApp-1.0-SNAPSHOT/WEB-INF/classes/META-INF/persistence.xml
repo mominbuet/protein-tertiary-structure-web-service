@@ -5,6 +5,7 @@
     <class>org.sample.db.Comogphogfeature</class>
     <class>org.sample.db.PDetails</class>
     <class>org.sample.db.PProtein</class>
+    <class>org.sample.db.SiteStats</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pprotein"/>

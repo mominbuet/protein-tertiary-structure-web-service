@@ -74,3 +74,8 @@ body {
 	padding-bottom:20px;
 	margin-top:60px;
 }
+.hero-unit {
+    font-size: 14px;
+    font-weight: 150;
+    line-height: 22px;
+}

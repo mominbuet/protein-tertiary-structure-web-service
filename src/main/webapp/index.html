@@ -56,32 +56,38 @@
             </div>
         </div>
         <div class="hero-unit">
-            <div class="offset2">
+            <div class="offset1">
                 <div id="info">
-                    <p>This web service is for comparing protein tertiary structure i.e 3D structure. 
-                        You can query here to compare query structure with all proteins in entire database and get 
-                        structural neighbours. Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">here</a>.
-                        Results also have a link to scop so that you can see more details about the structure there. We can process your query in instant where you had to wait few hours for query results in other web services who do similar tasks. You dont have to submit your email address to get your query results few hours later, you can have it here at instant!.To know about how to submit query see "user guide" section. To know how this works, go to "publication" section. 
+                    <p>This web service serves you structural neighbors of your query protein chains.
+                        This structural neighbors are based on tertiary structure i.e. 3D structure similarity of protein chains.
+                        Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">SCOPe</a>. And the results are also linked to <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">SCOPe</a>. 
+                        We can serve your query results in few minutes. That is, You don't have to submit your email address to get your query results few hours later anymore. This improvement in speed to compare protein tertiary structure became possible with our newly introduced features.
+
                     </p>
                     <h4><u>User guide:</u></h4>
                     <p>You can submit query two ways, submit pdb format structure(<b>Coming soon...</b>) file or submit scopId for the structures that are already in scop 2.03.   </p>
 
-                    <p>
-                    <h4>Query with scopId:</h4> Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1lp1b_" is a 7 character scopId.
-                    </p>
+                    <div>
+                        <h4>Query with scopId:</h4> Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1tqxb_" is a 7 character scopId.
+                    </div>
                 </div>
                 <h3>Enter ScopID</h3>
 
-                <p id="examples">Press enter after the scopID(ie. d1lp1b_)</p>
+                <p id="examples">Press enter after the scopID(ie. d1tqxb_)</p>
                 <div class="input-group">
-                    <input class="input-xlarge form-control" placeholder="scopid here..." id ="text" type="text"  name="search_text">
+                    <input class="input-xlarge form-control input-group" placeholder="scopid here..." id ="text" type="text"  name="search_text">
+                    <select id="slcCount" class="input-small input-group form-control">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
                     <span class="input-group-btn">
-                        <button id="send" class="btn btn-success" type="button">Search</button>
+                        <button id="send" class="input-group-btn btn btn-success" type="button">Search</button>
                     </span>
                 </div>
-                <h3>Upload pdb file(<i>coming soon...</i>)</h3>
-                <input class="form-control disabled" type="file"/>
-                <button class="btn btn-danger disabled" type="button">Upload</button>
+                <input class="form-control " id="filename" type="file"/>
+                <button class="btn btn-danger" type="button"  id="sendfile" >Upload</button>
                 <br><br><br>
                 <div id="allLogs">
                     <div id="chatLog" class="chatlog">
@@ -92,19 +98,51 @@
         </div>
         <!-- /container -->
 
-        <div id="output"></div>
+        <div id="output" class="col-sm-5 pull-left">
 
+        </div>
+        <div class="col-sm-4 pull-right">
+            Unique visitor <a href="http://www.research.buet.ac.bd/" target="_blank"><img src="http://www.e-zeeinternet.com/count.php?page=1077982&style=LED_r&nbdigits=5" alt="Counter" border="0" ></a>
+        </div>
         <script type="text/javascript" src="websocket.js"></script>
         <!--        <script type="text/javascript" src="whiteboard.js"></script>-->
         <!--        <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
         <script>
             var flg = 2; //default recieved
+            var socket;
+            /*function sendFile() {
+             var file = document.getElementById('filename').files[0];
+             var host = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
+             
+             socket = new WebSocket(host);
+             message('<p class="event">Socket Status: ' + socket.readyState);
+             socket.onopen = function() {
+             message('<p class="event">Socket Status: ' + socket.readyState + ' (open)');
+             }
+             socket.send('filename:' + file.name);
+             var reader = new FileReader();
+             var rawData = new ArrayBuffer();
+             alert("inserting " + file.name);
+             
+             reader.loadend = function() {
+             }
+             reader.onload = function(e) {
+             rawData = e.target.result;
+             socket.send(rawData);
+             alert("the File has been transferred.")
+             socket.send('end');
+             }
+             reader.readAsArrayBuffer(file);
+             }
+             function message(msg) {
+             $('#chatLog').append(msg + '</p>');
+             }*/
             function connect() {
                 var socket;
                 console.log(document.location.pathname);
                 var host = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
                 try {
-                    var socket = new WebSocket(host);
+                    socket = new WebSocket(host);
                     message('<p class="event">Socket Status: ' + socket.readyState);
                     socket.onopen = function() {
                         message('<p class="event">Socket Status: ' + socket.readyState + ' (open)');
@@ -132,9 +170,8 @@
                 } catch (exception) {
                     message('<p>Error' + exception);
                 }
-
                 function send() {
-                    var text = $('#text').val();
+                    var text = $('#text').val() + ',' + $('#slcCount').val();
                     if (text == "") {
                         message('<p class="warning">Please enter a message');
                         return;
@@ -142,13 +179,11 @@
                     try {
                         socket.send(text);
                         message('<p class="event">Sent: ' + text)
-
                     } catch (exception) {
                         message('<p class="warning">');
                     }
                     $('#text').val("");
                 }
-
                 function message(msg) {
                     $('#chatLog').append(msg + '</p>');
                 }
@@ -158,17 +193,44 @@
                     //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
                     $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
                     send();
-
-
                 });
-                /*$('#text').bind('keypress', function(e) {
-                    if (e.keyCode == 13) {
+                $('#sendfile').click(function() {
+                    try {
                         $('#chatLog p').remove(1000);
                         //$('#').remove();
                         //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
                         $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
+                        var file = document.getElementById('filename').files[0];
+                        socket.send('filename:' + file.name);
+                        $('#chatLog').append('<p class="event">sending file ' + file.name + '</p>');
+                        var reader = new FileReader();
+                        var rawData = new ArrayBuffer();
+                        //alert(file.name);
+
+                        reader.loadend = function() {
+
+                        }
+                        reader.onload = function(e) {
+                            rawData = e.target.result;
+                            console.log(rawData);
+                            socket.send(rawData);
+                            alert("the File has been transferred.")
+                            socket.send('end');
+                        }
+
+                        reader.readAsArrayBuffer(file);
+                    } catch (exception) {
+                        message('<p class="warning">');
                     }
-                });*/
+                });
+                /*$('#text').bind('keypress', function(e) {
+                 if (e.keyCode == 13) {
+                 $('#chatLog p').remove(1000);
+                 //$('#').remove();
+                 //$('#allLogs').append("<div id='chatLog' class='chatlog'></div>");
+                 $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
+                 }
+                 });*/
                 $('#text').keypress(function(event) {
                     if (event.keyCode == 13) {
                         $('#chatLog p').remove(1000);
@@ -177,7 +239,7 @@
                         $('#chatLog').html('<p class="event">Socket Status: 0</p><p class="event">Socket Status: 1 (open)</p>');
                         send();
                     }
-                 });
+                });
                 $('#disconnect').click(function() {
                     socket.close();
                 });
@@ -195,5 +257,6 @@
 
             });
         </script>
+
     </body>
 </html>
