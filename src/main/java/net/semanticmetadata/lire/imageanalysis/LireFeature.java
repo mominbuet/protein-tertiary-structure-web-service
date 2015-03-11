@@ -21,8 +21,8 @@ public abstract interface LireFeature
   public abstract void setStringRepresentation(String paramString);
 }
 
-
-/* Location:           E:\EclipseWorkspace\ComogPhogExtractor\lib\lire.jar
- * Qualified Name:     net.semanticmetadata.lire.imageanalysis.LireFeature
- * JD-Core Version:    0.7.0.1
+
+/* Location:           E:\EclipseWorkspace\ComogPhogExtractor\lib\lire.jar
+ * Qualified Name:     net.semanticmetadata.lire.imageanalysis.LireFeature
+ * JD-Core Version:    0.7.0.1
  */

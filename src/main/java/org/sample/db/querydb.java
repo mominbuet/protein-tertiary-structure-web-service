@@ -62,14 +62,14 @@ public class querydb {
         }
         return res;
     }
-    public Comogphogfeature getFeatureByScopID(String scop) {
-        Comogphogfeature res = null;
+    public ComogphogfeatureExtended getFeatureByScopID(String scop) {
+        ComogphogfeatureExtended res = null;
         try {
             //System.out.println("Here1");
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("sample_WhiteboardApp");
             EntityManager em = emf.createEntityManager();
             //System.out.println("Here2");
-            res = em.createNamedQuery("Comogphogfeature.findByScopid", Comogphogfeature.class).setParameter("scopid", scop)
+            res = em.createNamedQuery("ComogphogfeatureExtended.findByScopid", ComogphogfeatureExtended.class).setParameter("scopid", scop)
                     .setMaxResults(1).getResultList().get(0);
             System.out.println("found:: "+res.getScopid());
             //res =  results;

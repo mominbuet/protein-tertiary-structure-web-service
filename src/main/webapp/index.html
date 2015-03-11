@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
+        
+        <meta name="description" content="Comograd is a protein sturcture mathing tool for 3d structures of proteins. This web service serves you structural neighbors of your query protein chains.">
         <meta name="author" content="">
         <!--        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">-->
 
@@ -32,6 +33,7 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#">Home</a></li>
+                        <li ><a href="score.html">Score</a></li>
                         <li><a href="publication.html">Publication</a></li>
                         <li><a href="Upcoming.html">Upcoming</a></li>
                         <li class="dropdown">
@@ -214,7 +216,7 @@
                             rawData = e.target.result;
                             console.log(rawData);
                             socket.send(rawData);
-                            alert("the File has been transferred.")
+                            //alert("the File has been transferred.")
                             socket.send('end');
                         }
 

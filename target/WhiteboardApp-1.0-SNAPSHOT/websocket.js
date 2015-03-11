@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var pathname ="/protein-tertiary-structure-web-service/";
 //alert('here');
-var wsUri = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
+//var wsUri = "ws://" + document.location.host + document.location.pathname + "whiteboardendpoint";
+var wsUri = "ws://" + document.location.host + pathname + "whiteboardendpoint";
 var websocket = new WebSocket(wsUri);
 
 websocket.onerror = function(evt) { onError(evt) };

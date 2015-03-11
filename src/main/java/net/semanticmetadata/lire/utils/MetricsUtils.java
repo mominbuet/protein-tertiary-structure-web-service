@@ -197,8 +197,8 @@ public class MetricsUtils
   }
 }
 
-
-/* Location:           E:\EclipseWorkspace\ComogPhogExtractor\lib\lire.jar
- * Qualified Name:     net.semanticmetadata.lire.utils.MetricsUtils
- * JD-Core Version:    0.7.0.1
+
+/* Location:           E:\EclipseWorkspace\ComogPhogExtractor\lib\lire.jar
+ * Qualified Name:     net.semanticmetadata.lire.utils.MetricsUtils
+ * JD-Core Version:    0.7.0.1
  */

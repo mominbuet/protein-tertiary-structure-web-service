@@ -23,6 +23,9 @@ public class ComogPhogFeatureExtractor {
     int maxCaCount = 2000;
     double xyz[][];
 
+    public ComogPhogFeatureExtractor() {
+    }
+
     public String runFeatureExtraction(String fileName) {
         return runFeatureExtraction(new File(fileName));
     }

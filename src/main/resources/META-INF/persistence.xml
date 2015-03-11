@@ -3,6 +3,7 @@
   <persistence-unit name="sample_WhiteboardApp" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.sample.db.Comogphogfeature</class>
+    <class>org.sample.db.ComogphogfeatureExtended</class>
     <class>org.sample.db.PDetails</class>
     <class>org.sample.db.PProtein</class>
     <class>org.sample.db.SiteStats</class>
