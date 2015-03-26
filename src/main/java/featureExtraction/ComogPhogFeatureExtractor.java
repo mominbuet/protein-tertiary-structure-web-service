@@ -16,15 +16,10 @@ import org.apache.log4j.Logger;
  * @author rezaul karim
  */
 public class ComogPhogFeatureExtractor {
-
-//    public String camatDirName="D:\\camat";
-    static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
+static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
 	
     int maxCaCount = 2000;
     double xyz[][];
-
-    public ComogPhogFeatureExtractor() {
-    }
 
     public String runFeatureExtraction(String fileName) {
         return runFeatureExtraction(new File(fileName));
@@ -96,6 +91,7 @@ public class ComogPhogFeatureExtractor {
                 }
             }
             int numOfCaAtom = seqNo - 1;
+            if(numOfCaAtom<8){logger.debug("Too small molecule structure, number of CA atom: "+numOfCaAtom);return "";}
             return runFeatureExtraction(xyz[0], xyz[1], xyz[2], numOfCaAtom);
         } catch (FileNotFoundException e) {
         	logger.fatal(e.getMessage(),e);

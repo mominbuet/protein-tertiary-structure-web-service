@@ -116,7 +116,7 @@ public class score_match {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        if (fos1 != null && fos2 != null&& peersMap.get(s) != null && fCount==) {
+        if (fos1 != null && fos2 != null&& peersMap.get(s) != null ) {
             if (peersMap.get(s) == 2) {
                 try {
                     fos1.flush();
