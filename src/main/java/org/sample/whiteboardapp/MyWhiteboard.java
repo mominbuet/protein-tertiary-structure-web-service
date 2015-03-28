@@ -125,7 +125,7 @@ public class MyWhiteboard {
             s.getBasicRemote().sendText("<h4 style=\"color:orange;\"><b>Query no " + stats.getQueryNo() + "</b></h4>");
 
             int classmatch = 0, foldmatch = 0;
-            DecimalFormat df = new DecimalFormat("0.00");
+            DecimalFormat df = new DecimalFormat("0.000");
 
             //System.out.println("Here");
             s.getBasicRemote().sendText("Start time"
@@ -153,7 +153,7 @@ public class MyWhiteboard {
                     tmpDist += Math.pow((Integer.valueOf(queryFeat[i]) - Integer.valueOf(allF[i])), 2);
 
                 }
-                tmpDist = Math.sqrt(tmpDist);
+                tmpDist = Math.sqrt(tmpDist)/2000000;
                 distances.put(tmp, tmpDist);
                 //s.getBasicRemote().sendText(tmp + " distance " + tmpDist);
                 done++;

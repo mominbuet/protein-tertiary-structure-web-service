@@ -31,7 +31,7 @@
                 <a href="#" class="brand">COMOGRAD</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav nav-pills">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/Comograd/">Home</a></li>
                         <li  class="active"><a href="#">Score</a></li>
                         <li><a href="publication.html">Publication</a></li>
                         <li><a href="Upcoming.html">Upcoming</a></li>
@@ -59,22 +59,22 @@
         <div class="hero-unit">
             <div class="offset1">
                 <div id="info">
-                    <p>This web service serves you structural neighbors of your query protein chains.
-                        This structural neighbors are based on tertiary structure i.e. 3D structure similarity of protein chains.
+                    <p>This web service serves you similarity measure your query protein chains.
+<!--                        This structural neighbors are based on tertiary structure i.e. 3D structure similarity of protein chains.
                         Our database contains 152,486 structures from <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">SCOPe</a>. And the results are also linked to <a target="_blank" href="http://scop.berkeley.edu/about/ver=2.03">SCOPe</a>. 
-                        We can serve your query results in few minutes. That is, You don't have to submit your email address to get your query results few hours later anymore. This improvement in speed to compare protein tertiary structure became possible with our newly introduced features.
+                        We can serve your query results in few minutes. That is, You don't have to submit your email address to get your query results few hours later anymore. This improvement in speed to compare protein tertiary structure became possible with our newly introduced features.-->
 
                     </p>
-                    <h4><u>User guide:</u></h4>
+<!--                    <h4><u>User guide:</u></h4>
                     <p>You can submit query two ways, submit pdb format structure(<b>Coming soon...</b>) file or submit scopId for the structures that are already in scop 2.03.   </p>
 
                     <div>
                         <h4>Query with scopId:</h4> Please submit 7 char scopId of the query protein to search for structural neighbours. 7 Char scopId onsists of 'd' as  first character, the 4 char pdb id, then rest 2 char is chain id. As an example "d1tqxb_" is a 7 character scopId.
                     </div>
-                </div>
-                <h3>Enter ScopID</h3>
+                </div>-->
+                <h3>Enter files</h3>
 
-                <p id="examples">Press enter after the scopID(ie. d1tqxb_)</p>
+                <p id="examples">Press match button after files</p>
                 <div class="input-group">
                     <input class="form-control " id="filename1" type="file"/>
                     <input class="form-control " id="filename2" type="file"/>
@@ -133,7 +133,7 @@
             function connect() {
                 var socket;
                 console.log(document.location.pathname);
-                var host = "ws://" + document.location.host +  pathname+"scoreEndpoint";
+                var host = "ws://" + document.location.host + pathname + "scoreEndpoint";
                 try {
                     socket = new WebSocket(host);
                     message('<p class="event">Socket Status: ' + socket.readyState);
@@ -199,28 +199,26 @@
                         var file2 = document.getElementById('filename2').files[0];
                         socket.send('filename of second file:' + file2.name);
                         $('#chatLog').append('<p class="event">sending file ' + file2.name + '</p>');
-                        var reader = new FileReader();
-                        var rawData = new ArrayBuffer();
+                        var reader1 = new FileReader();
+                        var reader2 = new FileReader();
+                        var rawData1 = new ArrayBuffer();
+                        var rawData2 = new ArrayBuffer();
                         //alert(file.name);
 
-                        reader.loadend = function() {
-
+                        reader1.loadend = function() {}
+                        reader1.onload = function(e) {
+                            rawData1 = e.target.result;
+                            socket.send(rawData1);
+                            socket.send('end1');
                         }
-                        var flag_file = true;
-                        reader.onload = function(e) {
-                            rawData = e.target.result;
-                            //console.log(rawData);
-                            socket.send(rawData);
-                            //alert("the File has been transferred.")
-                            if (flag_file) {
-                                socket.send('end1');
-                                flag_file = false;
-                            }
-                            else
-                                socket.send('end2');
+                        reader2.loadend = function() {}
+                        reader2.onload = function(e) {
+                            rawData2 = e.target.result;
+                            socket.send(rawData2);
+                            socket.send('end2');
                         }
-                        reader.readAsArrayBuffer(file1);
-                        reader.readAsArrayBuffer(file2);
+                        reader1.readAsArrayBuffer(file1);
+                        reader2.readAsArrayBuffer(file2);
                     } catch (exception) {
                         message('<p class="warning">error in file upload</p>');
                     }
