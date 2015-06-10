@@ -67,7 +67,7 @@ public class MyWhiteboard {
                 e.printStackTrace();
             }
         }
-        session.getBasicRemote().sendText("Binary Data recieved");
+        session.getBasicRemote().sendText("Binary Data recieved of "+msg.capacity()+" bytes");
 
     }
 
@@ -132,7 +132,7 @@ public class MyWhiteboard {
                     + new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
             //s.getBasicRemote().sendText("Working on redis cache...");
 
-            Jedis jedis = new Jedis("123.49.42.228", 6379);
+            Jedis jedis = new Jedis("127.0.0.1", 6379);
             Set<String> scops = jedis.keys("d*");
             //jedis.set(searchFeat.getScopid(), searchFeat.getFeatureVector());
 
