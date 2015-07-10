@@ -10,14 +10,14 @@ import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
-
 /**
  *
  * @author rezaul karim
  */
 public class ComogPhogFeatureExtractor {
-static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
-	
+
+    static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
+
     int maxCaCount = 2000;
     double xyz[][];
 
@@ -91,13 +91,16 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
                 }
             }
             int numOfCaAtom = seqNo - 1;
-            if(numOfCaAtom<8){logger.debug("Too small molecule structure, number of CA atom: "+numOfCaAtom);return "";}
+            if (numOfCaAtom < 8) {
+                logger.debug("Too small molecule structure, number of CA atom: " + numOfCaAtom);
+                return "";
+            }
             return runFeatureExtraction(xyz[0], xyz[1], xyz[2], numOfCaAtom);
         } catch (FileNotFoundException e) {
-        	logger.fatal(e.getMessage(),e);
+            logger.fatal(e.getMessage(), e);
             return comogphog;
         } catch (NumberFormatException e) {
-        	logger.fatal(e.getMessage(),e);
+            logger.fatal(e.getMessage(), e);
             return comogphog;
         }
     }
@@ -106,14 +109,14 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
         try {
             double[][] calphadistmat = new double[numOfCAatom][numOfCAatom];
             double maxDistance = -1;
-            double minDistance=100000000;
+            double minDistance = 100000000;
             int n = 0;
             double totalDistData[] = new double[numOfCAatom * numOfCAatom];
             for (int j = 0; j < numOfCAatom; j++) {
                 for (int k = 0; k < numOfCAatom; k++) {
                     double dist = Math.sqrt((x[j] - x[k]) * (x[j] - x[k]) + (y[j] - y[k]) * (y[j] - y[k]) + (z[j] - z[k]) * (z[j] - z[k]));
                     maxDistance = Math.max(maxDistance, dist);
-                    minDistance=Math.min(minDistance, dist);
+                    minDistance = Math.min(minDistance, dist);
                     totalDistData[n++] = dist;
                 }
             }
@@ -123,15 +126,15 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
             int camatq1maxval = (int) (maxDistance * 2);
             for (int j = 0; j < numOfCAatom; j++) {
                 for (int k = 0; k < numOfCAatom; k++) {
-                    int valq2 = (int) ((totalDistData[j * numOfCAatom + k]-minDistance) * noQuantLevel / (maxDistance-minDistance));
+                    int valq2 = (int) ((totalDistData[j * numOfCAatom + k] - minDistance) * noQuantLevel / (maxDistance - minDistance));
                     calphadistmat[j][k] = valq2;
                 }
             }
-            
+
 //            printCalphamatImage(calphadistmat, numOfCAatom);
             return runFeatureExtraction(calphadistmat, numOfCAatom);
         } catch (Exception e) {
-        	logger.fatal(e.getMessage(),e);
+            logger.fatal(e.getMessage(), e);
             return "";
         }
     }
@@ -159,6 +162,7 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
 //    }
 //   
 //    
+
     public String runFeatureExtraction(double calphaImage[][], int numOfCAatom) {
         int newdimx = numOfCAatom, newdimy = numOfCAatom;
         double[][] resizedImage = calphaImage;
@@ -185,16 +189,16 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
         String comogphog = "";
         for (double[] comog1 : comog) {
             for (int j = 0; j < comog1.length; j++) {
-                comogphog = comogphog + (int)comog1[j] + "-";
+                comogphog = comogphog + (int) comog1[j] + "-";
             }
         }
-        
-        double phogsum=0;
+
+        double phogsum = 0;
         for (int i = 0; i < phog.length; i++) {
-            phogsum+= phog[i];
+            phogsum += phog[i];
         }
         for (int i = 0; i < phog.length; i++) {
-            comogphog = comogphog + (int)((phog[i]/phogsum)*1000000) + "-";
+            comogphog = comogphog + (int) ((phog[i] / phogsum) * 1000000) + "-";
         }
         comogphog = comogphog.substring(0, comogphog.length() - 2);
         return comogphog;
@@ -202,38 +206,37 @@ static Logger logger = Logger.getLogger(ComogPhogFeatureExtractor.class);
 
     private double[] computePhog(double[][] inputMat) {
 
-        if(inputMat.length<=1)return null;
-        
+        if (inputMat.length <= 1) {
+            return null;
+        }
+
         int bin = 16;
         double angle = 360;
         int L = 3;
-        int dimx=inputMat.length;
-        int dimy=inputMat[0].length;
-        BufferedImage im=new BufferedImage(dimx, dimy, BufferedImage.TYPE_BYTE_GRAY);
-          WritableRaster raster = im.getRaster();
-        for(int y = 0; y<dimx; y++){
-         for(int x = 0; x<dimy; x++){
-              raster.setSample(x,y,0,(int)inputMat[x][y]); 
-         }
-}
-    
-//        SavaeBufferedImageToDiskFile.save(im, null, null);
-        
-        
-        
-        double[] p=null;
-        try{
-                 PHOG phog=new PHOG(3);
-phog.extract(im);
-//return phg.getByteArrayRepresentation();
-    
-//        p = new double[85 * 9];
-        
-        p=phog.getDoubleHistogram();
- 
-        }catch(Exception e){logger.fatal(e.getMessage(),e);
+        int dimx = inputMat.length;
+        int dimy = inputMat[0].length;
+        BufferedImage im = new BufferedImage(dimx, dimy, BufferedImage.TYPE_BYTE_GRAY);
+        WritableRaster raster = im.getRaster();
+        for (int y = 0; y < dimx; y++) {
+            for (int x = 0; x < dimy; x++) {
+                raster.setSample(x, y, 0, (int) inputMat[x][y]);
+            }
         }
-        
+
+//        SavaeBufferedImageToDiskFile.save(im, null, null);
+        double[] p = null;
+        try {
+            PHOG phog = new PHOG(3);
+            phog.extract(im);
+//return phg.getByteArrayRepresentation();
+
+//        p = new double[85 * 9];
+            p = phog.getDoubleHistogram();
+
+        } catch (Exception e) {
+            logger.fatal(e.getMessage(), e);
+        }
+
         return p;
     }
 
@@ -294,8 +297,8 @@ phog.extract(im);
         return comog;
     }
 
-
     private static class ImFilter {
+
         public static double[][] runImDx(double[][] input) {
             int dimx = input.length;
             int dimy = input[0].length;
@@ -330,15 +333,14 @@ phog.extract(im);
         }
     }
 
-   
-        static void print(double mat[][]) {
-            for (double[] mat1 : mat) {
-                for (int j = 0; j < mat1.length; j++) {
-                    System.out.print(" " + mat1[j]);
-                }
-                System.out.println("");
+    static void print(double mat[][]) {
+        for (double[] mat1 : mat) {
+            for (int j = 0; j < mat1.length; j++) {
+                System.out.print(" " + mat1[j]);
             }
             System.out.println("");
         }
+        System.out.println("");
+    }
 
-   }
+}
