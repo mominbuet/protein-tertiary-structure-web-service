@@ -5,18 +5,18 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import org.sample.db.PProtein;
 
-@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2015-06-10T14:08:05")
+@Generated(value="EclipseLink-2.5.1.v20130918-rNA", date="2015-12-13T14:39:25")
 @StaticMetamodel(PDetails.class)
 public class PDetails_ { 
 
-    public static volatile SingularAttribute<PDetails, String> sunid;
+    public static volatile SingularAttribute<PDetails, String> fold;
     public static volatile SingularAttribute<PDetails, String> species;
     public static volatile SingularAttribute<PDetails, String> class1;
-    public static volatile SingularAttribute<PDetails, String> superfamily;
-    public static volatile SingularAttribute<PDetails, String> family;
     public static volatile SingularAttribute<PDetails, String> protein;
     public static volatile SingularAttribute<PDetails, PProtein> pid;
-    public static volatile SingularAttribute<PDetails, String> fold;
+    public static volatile SingularAttribute<PDetails, String> superfamily;
+    public static volatile SingularAttribute<PDetails, String> family;
+    public static volatile SingularAttribute<PDetails, String> sunid;
     public static volatile SingularAttribute<PDetails, Integer> detid;
 
 }

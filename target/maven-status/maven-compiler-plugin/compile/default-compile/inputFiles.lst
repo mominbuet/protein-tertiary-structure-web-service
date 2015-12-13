@@ -1,21 +1,21 @@
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\PProtein.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\imageanalysis\LireFeature.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\featureExtraction\PHOG.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\PDetails.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\SiteStats.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\featureExtraction\TestMainExtractFeatureComogPhogFromPDBStyleFile.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\featureExtraction\ComogPhogFeatureExtractor.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\GenericResource.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\Figure.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\featureExtraction\FilerecvResource.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\MetricsUtils.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\score_match.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\utils.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\Coordinates.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\querydb.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\insertDB.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\Comogphogfeature.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\MyWhiteboard.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\SerializationUtils.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\org\sample\db\ComogphogfeatureExtended.java
-H:\Work\4-2\protein\lire test\java projects Office\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\ImageUtils.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\featureExtraction\ComogPhogFeatureExtractor.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\GenericResource.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\SiteStats.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\querydb.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\ImageUtils.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\PProtein.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\Comogphogfeature.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\featureExtraction\PHOG.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\Coordinates.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\insertDB.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\score_match.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\featureExtraction\FilerecvResource.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\utils.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\ComogphogfeatureExtended.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\imageanalysis\LireFeature.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\Figure.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\whiteboardapp\MyWhiteboard.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\org\sample\db\PDetails.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\SerializationUtils.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\featureExtraction\TestMainExtractFeatureComogPhogFromPDBStyleFile.java
+E:\Protein research\protein-tertiary-structure-web-service\src\main\java\net\semanticmetadata\lire\utils\MetricsUtils.java
